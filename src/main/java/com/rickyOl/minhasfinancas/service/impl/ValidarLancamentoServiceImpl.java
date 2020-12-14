@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.rickyOl.minhasfinancas.exceptions.RegraNegocioException;
 import com.rickyOl.minhasfinancas.model.entity.Lancamento;
 import com.rickyOl.minhasfinancas.service.ValidarLancamentoService;
 
+@Service
 public class ValidarLancamentoServiceImpl implements ValidarLancamentoService {
 
 	@Override

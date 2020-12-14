@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.stereotype.Service;
 
 import com.rickyOl.minhasfinancas.exceptions.ErroAutenticacao;
@@ -51,6 +52,12 @@ public class UsuarioServiceImpl implements UsuarioService{
 		if (existeEmail) {
 			throw new RegraNegocioException("Já Existe um usuário com este email:".concat(email));
 		}
+	}
+
+	@Override
+	public Usuario buscarUsuarioPorId(Long id) {
+		Optional<Usuario> usuario = usuarioRepository.findById(id);
+		return usuario.isPresent() ? usuario.get() : null;
 	}
 
 }

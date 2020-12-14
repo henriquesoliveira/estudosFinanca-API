@@ -1,5 +1,6 @@
 package com.rickyOl.minhasfinancas.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.rickyOl.minhasfinancas.model.entity.Lancamento;
@@ -18,5 +19,8 @@ public interface LancamentoService {
 	void atualizarStatus(Lancamento lancamento, StatusLancamento status);
 	
 	void validar(Lancamento lancamento);
+	
+	Lancamento buscarLancamentoPorId(Long id);
 
+	BigDecimal obterSaldoPorUsuario(Long id);
 }
