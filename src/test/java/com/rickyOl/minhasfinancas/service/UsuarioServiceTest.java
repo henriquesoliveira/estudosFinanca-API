@@ -1,5 +1,6 @@
 package com.rickyOl.minhasfinancas.service;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,7 +37,7 @@ public class UsuarioServiceTest {
 		//Cenario
 		Mockito.when(repository.existsByEmail(Mockito.anyString())).thenReturn(false);
 		//ação
-		assertDoesNotThrow(()->service.validarEmail("email@email.com"),"Já Existe um usuário com este email:");
+		assertAll(()->service.validarEmail("email@email.com"));
 	}
 	
 	@Test
@@ -109,7 +110,6 @@ public class UsuarioServiceTest {
 		Mockito.doThrow(RegraNegocioException.class).when(service).validarEmail(email);
 		
 		Mockito.verify(repository, Mockito.never()).save(usuario);
-		//assertThrows(RegraNegocioException.class, ()-> service.salvarUsuario(usuario));
 	}
 	
 }
