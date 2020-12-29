@@ -92,6 +92,16 @@ public class LancamentoResource {
 			return new ResponseEntity("Lancamento não encontrado", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity buscarLancamentoPorId(@PathVariable("id") Long id) {
+		Lancamento lancamento = service.buscarLancamentoPorId(id);	
+		
+		if(Objects.nonNull(lancamento))
+			return new ResponseEntity(converter(lancamento), HttpStatus.OK);
+		else
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+	}
 
 	@GetMapping
 	public ResponseEntity buscarLancamentos(@RequestParam(value = "descricao", required = false) String descricao,
@@ -118,6 +128,19 @@ public class LancamentoResource {
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
+	}
+	
+	private LancamentoDTO converter(Lancamento lanc) {
+		return LancamentoDTO.builder()
+				.id(lanc.getId())
+				.descricao(lanc.getDescricao())
+				.ano(lanc.getAno())
+				.mes(lanc.getMes())
+				.valor(lanc.getValor())
+				.tipoLancamento(lanc.getTipoLancamento().name())
+				.status(lanc.getStatus().name())
+				.usuario(lanc.getUsuario().getId())
+				.build();
 	}
 
 	private Lancamento montaObj(LancamentoDTO dto) {
