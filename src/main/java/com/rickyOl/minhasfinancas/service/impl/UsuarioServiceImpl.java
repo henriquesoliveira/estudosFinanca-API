@@ -50,7 +50,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public void validarEmail(String email) {
 		boolean existeEmail = usuarioRepository.existsByEmail(email);
 		if (existeEmail) {
-			throw new RegraNegocioException("Já Existe um usuário com este email:".concat(email));
+			throw new RegraNegocioException("Já existe um Usuário com este email:".concat(email));
 		}
 	}
 
